@@ -4,14 +4,6 @@ name: default
 
 steps:
 
-  - name: check-docker
-    image: docker
-    volumes:
-      - name: dockersock
-        path: /var/run/docker.sock
-    commands:
-      - docker info
-
   - name: install
     image: python:3.11
     commands:
@@ -20,7 +12,7 @@ steps:
   - name: test
     image: python:3.11
     commands:
-      - python -m py_compile app.py
+      - python -m py_compile main.py
 
   - name: build
     image: docker:dind
