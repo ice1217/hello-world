@@ -29,7 +29,7 @@ steps:
       - name: dockersock
         path: /var/run/docker.sock
     commands:
-      - ./scripts/deploy.sh
+      - deploy.sh
 
 volumes:
   - name: dockersock
