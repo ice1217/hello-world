@@ -1,0 +1,47 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+
+  - name: check-docker
+    image: docker
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+    commands:
+      - docker info
+
+
+  - name: install
+    image: python:3.11
+    commands:
+      - pip install -r requirements.txt
+
+  - name: test
+    image: python:3.11
+    commands:
+      - python -m py_compile app.py
+
+  - name: build
+    image: docker:dind
+    privileged: true
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+    commands:
+      - docker build -t hello-world .
+
+    - name: deploy
+    image: docker
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+    commands:
+      - ./scripts/deploy.sh
+
+
+volumes:
+  - name: dockersock
+    host:
+      path: /var/run/docker.sock
