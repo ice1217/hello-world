@@ -24,7 +24,6 @@ steps:
       - docker build -t hello-world .
 
   - name: deploy
-    image: docker
     volumes:
       - name: dockersock
         path: /var/run/docker.sock
