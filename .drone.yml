@@ -12,7 +12,6 @@ steps:
     commands:
       - docker info
 
-
   - name: install
     image: python:3.11
     commands:
@@ -32,14 +31,13 @@ steps:
     commands:
       - docker build -t hello-world .
 
-    - name: deploy
+  - name: deploy
     image: docker
     volumes:
       - name: dockersock
         path: /var/run/docker.sock
     commands:
       - ./scripts/deploy.sh
-
 
 volumes:
   - name: dockersock
