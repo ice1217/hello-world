@@ -8,24 +8,22 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    
-    container:
-      image: python:3.11
       
     steps:
-      - name: checkout
-      - uses: actions/checkout@v3
+      - name: Checkout
+      - uses: actions/checkout@v5
 
-      - name: setup
-        uses: actions/setup-python@v4
-        with: python-version: '3.11'
+      - name: Setup
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
 
-      - name: install packages
+      - name: Install packages
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: execute
+      - name: Run
         env:
           SOME_SECRET: AAA
         run: python main.py
