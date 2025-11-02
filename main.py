@@ -1,7 +1,6 @@
 import os
 
 from flask import Flask, send_file
-from app import app
 
 app = Flask(__name__)
 
